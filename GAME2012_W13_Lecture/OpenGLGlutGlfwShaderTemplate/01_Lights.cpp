@@ -84,7 +84,7 @@ glm::mat4 View, Projection;
 unsigned char keys = 0; // Initialized to 0 or 0b00000000.
 
 // Texture variables.
-GLuint blankID, hedgeID, wallID, wall2ID;
+GLuint blankID, hedgeID, wallID, wall2ID, coneID;
 GLint width, height, bitDepth;
 
 // Light objects. Now OOP.
@@ -128,7 +128,8 @@ int lastX, lastY;
 // Geometry data.
 Grid g_grid(32);
 Cube g_cube, g_hedge, g_wall(6.0f, 6.0f, 6.0f), g_wall2;
-Prism g_prism(7);
+Prism g_prism(12);
+Cone g_cone(12);
 
 void timer(int); // Prototype.
 
@@ -233,6 +234,22 @@ void init(void)
 	stbi_image_free(image);
 	// End fourth image.
 
+	// Load fifth image
+	image = stbi_load("cone.jpg", &width, &height, &bitDepth, 0);
+	if (!image) { cout << "Unable to load file!" << endl; }
+	glGenTextures(1, &coneID);
+	glBindTexture(GL_TEXTURE_2D, coneID);
+	// Note: image types with native transparency will need to be GL_RGBA instead of GL_RGB.
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+	// glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glGenerateMipmap(GL_TEXTURE_2D);
+	stbi_image_free(image);
+	// End fifth image.
+
 	glUniform1i(glGetUniformLocation(program, "texture0"), 0);
 
 	// Setting material values.
@@ -278,6 +295,7 @@ void init(void)
 	g_wall.BufferShape();
 	g_wall2.BufferShape();
 	g_prism.BufferShape();
+	g_cone.BufferShape();
 
 	// Enable depth testing and face culling. 
 	glEnable(GL_DEPTH_TEST);
@@ -407,7 +425,11 @@ void display(void)
 	g_hedge.DrawShape(GL_TRIANGLES);
 
 	// 12
-	transformObject(glm::vec3(8.0f, 2.0f, 1.0f), X_AXIS, 0.0f, glm::vec3(21.0f, 0.0f, -14.0f));
+	transformObject(glm::vec3(3.0f, 2.0f, 1.0f), X_AXIS, 0.0f, glm::vec3(21.0f, 0.0f, -14.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 12b
+	transformObject(glm::vec3(4.0f, 2.0f, 1.0f), X_AXIS, 0.0f, glm::vec3(25.0f, 0.0f, -14.0f));
 	g_hedge.DrawShape(GL_TRIANGLES);
 
 	// 13
@@ -471,7 +493,7 @@ void display(void)
 	g_hedge.DrawShape(GL_TRIANGLES);
 
 	// 28
-	transformObject(glm::vec3(10.0f, 2.0f, 1.0f), X_AXIS, 0.0f, glm::vec3(11.0f, 0.0f, -24.0f));
+	transformObject(glm::vec3(19.0f, 2.0f, 1.0f), X_AXIS, 0.0f, glm::vec3(2.0f, 0.0f, -24.0f));
 	g_hedge.DrawShape(GL_TRIANGLES);
 
 	// 29
@@ -514,6 +536,61 @@ void display(void)
 	// 38
 	glBindTexture(GL_TEXTURE_2D, hedgeID);
 	transformObject(glm::vec3(1.0f, 2.0f, 3.0f), X_AXIS, 0.0f, glm::vec3(13.0f, 0.0f, -9.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 39
+	glBindTexture(GL_TEXTURE_2D, hedgeID);
+	transformObject(glm::vec3(2.0f, 2.0f, 1.0f), X_AXIS, 0.0f, glm::vec3(13.0f, 0.0f, -10.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 40
+	glBindTexture(GL_TEXTURE_2D, hedgeID);
+	transformObject(glm::vec3(1.0f, 2.0f, 2.0f), X_AXIS, 0.0f, glm::vec3(15.0f, 0.0f, -11.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 41 - Center Room Bottom
+	glBindTexture(GL_TEXTURE_2D, hedgeID);
+	transformObject(glm::vec3(9.0f, 2.0f, 1.0f), X_AXIS, 0.0f, glm::vec3(12.0f, 0.0f, -12.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 42 - Center Room Top
+	glBindTexture(GL_TEXTURE_2D, hedgeID);
+	transformObject(glm::vec3(7.0f, 2.0f, 1.0f), X_AXIS, 0.0f, glm::vec3(13.0f, 0.0f, -20.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 43a - Center Room Top Left
+	glBindTexture(GL_TEXTURE_2D, hedgeID);
+	transformObject(glm::vec3(1.0f, 2.0f, 3.0f), X_AXIS, 0.0f, glm::vec3(13.0f, 0.0f, -19.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 43b - Center Room Bottom Left
+	glBindTexture(GL_TEXTURE_2D, hedgeID);
+	transformObject(glm::vec3(1.0f, 2.0f, 3.0f), X_AXIS, 0.0f, glm::vec3(13.0f, 0.0f, -15.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 44a - Center Room Top Right
+	glBindTexture(GL_TEXTURE_2D, hedgeID);
+	transformObject(glm::vec3(1.0f, 2.0f, 3.0f), X_AXIS, 0.0f, glm::vec3(19.0f, 0.0f, -19.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 44b - Center Room Bottom Right
+	glBindTexture(GL_TEXTURE_2D, hedgeID);
+	transformObject(glm::vec3(1.0f, 2.0f, 3.0f), X_AXIS, 0.0f, glm::vec3(19.0f, 0.0f, -15.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 45
+	glBindTexture(GL_TEXTURE_2D, hedgeID);
+	transformObject(glm::vec3(7.0f, 2.0f, 1.0f), X_AXIS, 0.0f, glm::vec3(13.0f, 0.0f, -22.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 46
+	glBindTexture(GL_TEXTURE_2D, hedgeID);
+	transformObject(glm::vec3(1.0f, 2.0f, 14.0f), X_AXIS, 0.0f, glm::vec3(11.0f, 0.0f, -23.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 47
+	glBindTexture(GL_TEXTURE_2D, hedgeID);
+	transformObject(glm::vec3(1.0f, 2.0f, 5.0f), X_AXIS, 0.0f, glm::vec3(9.0f, 0.0f, -30.0f));
 	g_hedge.DrawShape(GL_TRIANGLES);
 
 
@@ -806,6 +883,35 @@ void display(void)
 	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(-1.0f, 5.0f, -2.0f));
 	g_wall2.DrawShape(GL_TRIANGLES);
 
+	//towers
+
+	transformObject(glm::vec3(3.0f, 8.0f, 3.0f), X_AXIS, 0.0f, glm::vec3(-1.5f, 0.0f, -1.5f));
+	g_prism.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(3.0f, 8.0f, 3.0f), X_AXIS, 0.0f, glm::vec3(-1.5f, 0.0f, -33.5f));
+	g_prism.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(3.0f, 8.0f, 3.0f), X_AXIS, 0.0f, glm::vec3(30.5f, 0.0f, -1.5f));
+	g_prism.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(3.0f, 8.0f, 3.0f), X_AXIS, 0.0f, glm::vec3(30.5f, 0.0f, -33.5f));
+	g_prism.DrawShape(GL_TRIANGLES);
+
+	//tower cones
+
+	glBindTexture(GL_TEXTURE_2D, coneID);
+	transformObject(glm::vec3(4.0f, 5.0f, 4.0f), X_AXIS, 0.0f, glm::vec3(-2.0f, 8.0f, -2.0f));
+	g_cone.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(4.0f, 5.0f, 4.0f), X_AXIS, 0.0f, glm::vec3(-2.0f, 8.0f, -34.0f));
+	g_cone.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(4.0f, 5.0f, 4.0f), X_AXIS, 0.0f, glm::vec3(30.0f, 8.0f, -34.0f));
+	g_cone.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(4.0f, 5.0f, 4.0f), X_AXIS, 0.0f, glm::vec3(30.0f, 8.0f, -2.0f));
+	g_cone.DrawShape(GL_TRIANGLES);
+
 	//// Plane.
 	//transformObject(glm::vec3(1.0f, 1.0f, 1.0f), X_AXIS, -90.0f, glm::vec3(0.0f, -0.1f, 0.0f));
 	//g_grid.DrawShape(GL_TRIANGLES);
@@ -1004,6 +1110,7 @@ void clean()
 	glDeleteTextures(1, &hedgeID);
 	glDeleteTextures(1, &wallID);
 	glDeleteTextures(1, &wall2ID);
+	glDeleteTextures(1, &coneID);
 }
 
 //---------------------------------------------------------------------

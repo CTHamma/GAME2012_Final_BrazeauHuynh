@@ -210,8 +210,8 @@ struct Grid : public Shape // Flat grid on ground. Starts at 0,0,0 and increases
 		}
 		for (int i = 0; i < shape_vertices.size(); i += 3)
 		{
-			shape_uvs.push_back(0); // No texture, so value doesn't matter.
-			shape_uvs.push_back(0);
+			shape_uvs.push_back(shape_vertices[i]);
+			shape_uvs.push_back(shape_vertices[i + 1]);
 		}
 		ColorShape(1.0f, 0.1f, 1.0f);
 		CalcAverageNormals(shape_indices, shape_indices.size(), shape_vertices, shape_vertices.size());
@@ -378,8 +378,8 @@ struct Prism : public Shape
 		shape_indices.push_back(sides);
 		for (int i = 0; i < shape_vertices.size(); i += 3)
 		{
-			shape_uvs.push_back(0); // No texture, so value doesn't matter.
-			shape_uvs.push_back(0);
+			shape_uvs.push_back(shape_vertices[i]);
+			shape_uvs.push_back(shape_vertices[i + 1]);
 		}
 		ColorShape(1.0f, 1.0f, 1.0f);
 		CalcAverageNormals(shape_indices, shape_indices.size(), shape_vertices, shape_vertices.size());
@@ -427,8 +427,8 @@ struct Cone : public Shape
 		shape_indices.push_back(1);
 		for (int i = 0; i < shape_vertices.size(); i += 3)
 		{
-			shape_uvs.push_back(0); // No texture, so value doesn't matter.
-			shape_uvs.push_back(0);
+			shape_uvs.push_back(shape_vertices[i]);
+			shape_uvs.push_back(shape_vertices[i + 1]);
 		}
 		ColorShape(1.0f, 1.0f, 1.0f);
 		CalcAverageNormals(shape_indices, shape_indices.size(), shape_vertices, shape_vertices.size());
