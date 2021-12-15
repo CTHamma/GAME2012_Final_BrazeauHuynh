@@ -18,7 +18,7 @@
     <ClCompile Include="prepShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="01_Lights.cpp">
+    <ClCompile Include="GAME2012_Final_BrazeauHuynh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

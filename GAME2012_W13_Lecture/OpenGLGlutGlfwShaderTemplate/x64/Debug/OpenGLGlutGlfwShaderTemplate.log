@@ -1,4 +1,4 @@
-﻿  01_Lights.cpp
+﻿  GAME2012_Final_BrazeauHuynh.cpp
 C:\Users\Kenny Huynh\Documents\College\George Brown\Semester 3\Unity\GAME2012_Final_BrazeauHuynh\GAME2012_W13_Lecture\OpenGLGlutGlfwShaderTemplate\Shape.h(36,23): warning C4267: 'return': conversion from 'size_t' to 'GLsizei', possible loss of data
 C:\Users\Kenny Huynh\Documents\College\George Brown\Semester 3\Unity\GAME2012_Final_BrazeauHuynh\GAME2012_W13_Lecture\OpenGLGlutGlfwShaderTemplate\Shape.h(98,21): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Kenny Huynh\Documents\College\George Brown\Semester 3\Unity\GAME2012_Final_BrazeauHuynh\GAME2012_W13_Lecture\OpenGLGlutGlfwShaderTemplate\Shape.h(161,1): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
@@ -19,4 +19,5 @@ C:\Users\Kenny Huynh\Documents\College\George Brown\Semester 3\Unity\GAME2012_Fi
 C:\Users\Kenny Huynh\Documents\College\George Brown\Semester 3\Unity\GAME2012_Final_BrazeauHuynh\GAME2012_W13_Lecture\OpenGLGlutGlfwShaderTemplate\Shape.h(385,1): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
 C:\Users\Kenny Huynh\Documents\College\George Brown\Semester 3\Unity\GAME2012_Final_BrazeauHuynh\GAME2012_W13_Lecture\OpenGLGlutGlfwShaderTemplate\Shape.h(403,1): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
 C:\Users\Kenny Huynh\Documents\College\George Brown\Semester 3\Unity\GAME2012_Final_BrazeauHuynh\GAME2012_W13_Lecture\OpenGLGlutGlfwShaderTemplate\Shape.h(434,1): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
+C:\Users\Kenny Huynh\Documents\College\George Brown\Semester 3\Unity\GAME2012_Final_BrazeauHuynh\GAME2012_W13_Lecture\OpenGLGlutGlfwShaderTemplate\GAME2012_Final_BrazeauHuynh.cpp(308,33): warning C4305: 'argument': truncation from 'double' to 'GLclampf'
   OpenGLGlutGlfwShaderTemplate.vcxproj -> C:\Users\Kenny Huynh\Documents\College\George Brown\Semester 3\Unity\GAME2012_Final_BrazeauHuynh\GAME2012_W13_Lecture\x64\Debug\OpenGLGlutGlfwShaderTemplate.exe
