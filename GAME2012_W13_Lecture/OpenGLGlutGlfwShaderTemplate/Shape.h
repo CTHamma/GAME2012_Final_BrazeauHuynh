@@ -213,7 +213,7 @@ struct Grid : public Shape // Flat grid on ground. Starts at 0,0,0 and increases
 			shape_uvs.push_back(shape_vertices[i]);
 			shape_uvs.push_back(shape_vertices[i + 1]);
 		}
-		ColorShape(1.0f, 0.1f, 1.0f);
+		ColorShape(1.0f, 1.0f, 1.0f);
 		CalcAverageNormals(shape_indices, shape_indices.size(), shape_vertices, shape_vertices.size());
 	}	
 };
