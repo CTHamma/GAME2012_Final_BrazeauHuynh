@@ -280,30 +280,30 @@ struct Cube : public Shape
 			xScale, yScale, 	// 2. // scaleX, scaleY, 	// 2.
 			0.0f, yScale,		// 3. // 0.0f, scaleY,		// 3.
 			// Right.
-			0.0f, 0.0f, 	// 1.
-			1.0f, 0.0f, 	// 5.
-			1.0f, 1.0f, 	// 6.
-			0.0f, 1.0f,		// 2.
+			0.0f, 0.0f, 	// 0.
+			xScale, 0.0f, 	// 1. // scaleX, 0.0f, 	// 1. 
+			xScale, yScale, 	// 2. // scaleX, scaleY, 	// 2.
+			0.0f, yScale,		// 3. // 0.0f, scaleY,		// 3.
 			// Back.
-			0.0f, 0.0f, 	// 5.
-			1.0f, 0.0f, 	// 4.
-			1.0f, 1.0f,		// 7.
-			0.0f, 1.0f,		// 6.
+			0.0f, 0.0f, 	// 0.
+			xScale, 0.0f, 	// 1. // scaleX, 0.0f, 	// 1. 
+			xScale, yScale, 	// 2. // scaleX, scaleY, 	// 2.
+			0.0f, yScale,		// 3. // 0.0f, scaleY,		// 3.
 			// Left.
-			0.0f, 0.0f,		// 4.
-			1.0f, 0.0f,		// 0.
-			1.0f, 1.0f,		// 3.
-			0.0f, 1.0f,		// 7.
+			0.0f, 0.0f, 	// 0.
+			xScale, 0.0f, 	// 1. // scaleX, 0.0f, 	// 1. 
+			xScale, yScale, 	// 2. // scaleX, scaleY, 	// 2.
+			0.0f, yScale,		// 3. // 0.0f, scaleY,		// 3.
 			// Top.
-			0.0f, 0.0f,		// 7.
-			1.0f, 0.0f,		// 3.
-			1.0f, 1.0f,		// 2.
-			0.0f, 1.0f,		// 6.
+			0.0f, 0.0f, 	// 0.
+			xScale, 0.0f, 	// 1. // scaleX, 0.0f, 	// 1. 
+			xScale, yScale, 	// 2. // scaleX, scaleY, 	// 2.
+			0.0f, yScale,		// 3. // 0.0f, scaleY,		// 3.
 			// Bottom.
-			0.0f, 0.0f,		// 4.
-			1.0f, 0.0f,		// 5.
-			1.0f, 1.0f,		// 1.
-			0.0f, 1.0f		// 0.
+			0.0f, 0.0f, 	// 0.
+			xScale, 0.0f, 	// 1. // scaleX, 0.0f, 	// 1. 
+			xScale, yScale, 	// 2. // scaleX, scaleY, 	// 2.
+			0.0f, yScale,		// 3. // 0.0f, scaleY,		// 3.
 		};
 		ColorShape(1.0f, 1.0f, 1.0f);
 		CalcAverageNormals(shape_indices, shape_indices.size(), shape_vertices, shape_vertices.size());
