@@ -90,7 +90,7 @@ GLint width, height, bitDepth;
 // Light objects. Now OOP.
 AmbientLight aLight(
 	glm::vec3(1.0f, 1.0f, 1.0f),	// Diffuse colour.
-	0.1f);							// Diffuse strength.
+	1.0f);							// Diffuse strength.
 
 DirectionalLight dLight(
 	glm::vec3(1.0f, 0.0f, 0.0f),	// Origin.
@@ -126,8 +126,8 @@ GLfloat pitch, yaw;
 int lastX, lastY;
 
 // Geometry data.
-Grid g_grid(10);
-Cube g_cube;
+Grid g_grid(32);
+Cube g_cube, g_hedge, g_wall, g_wall2;
 Prism g_prism(7);
 
 void timer(int); // Prototype.
@@ -226,6 +226,9 @@ void init(void)
 	// All VAO/VBO data now in Shape.h! But we still need to do this AFTER OpenGL is initialized.
 	g_grid.BufferShape();
 	g_cube.BufferShape();
+	g_hedge.BufferShape();
+	g_wall.BufferShape();
+	g_wall2.BufferShape();
 	g_prism.BufferShape();
 
 	// Enable depth testing and face culling. 
@@ -286,23 +289,47 @@ void display(void)
 
 	// Grid. Note: I rendered it solid!
 	transformObject(glm::vec3(1.0f, 1.0f, 1.0f), X_AXIS, -90.0f, glm::vec3(0.0f, 0.0f, 0.0f));
-	g_grid.DrawShape(GL_TRIANGLES);
+	g_grid.DrawShape(GL_LINES);
 
-	// Cube.
-	transformObject(glm::vec3(1.0f, 1.0f, 1.0f), X_AXIS, 0.0f, glm::vec3(6.0f, 0.0f, 0.0f));
-	g_cube.DrawShape(GL_TRIANGLES);
+	// Front Left Wall.
+	transformObject(glm::vec3(15.0f, 6.0f, 2.0f), X_AXIS, 0.0f, glm::vec3(0.0f, 0.0f, -1.0f));
+	g_wall.DrawShape(GL_TRIANGLES);
 
-	// Prism.
-	transformObject(glm::vec3(1.0f, 1.0f, 1.0f), X_AXIS, 0.0f, glm::vec3(4.0f, 2.0f, -1.0f));
-	glUniform1f(glGetUniformLocation(program, "mat.specularStrength"), 1.0f);
-	glUniform1f(glGetUniformLocation(program, "mat.shininess"), 128);
-	g_prism.DrawShape(GL_TRIANGLES);
-	
-	// Prism2.
-	transformObject(glm::vec3(1.0f, 1.0f, 1.0f), X_AXIS, 0.0f, glm::vec3(4.0f, 0.0f, -1.0f));
-	glUniform1f(glGetUniformLocation(program, "mat.specularStrength"), mat.specularStrength);
-	glUniform1f(glGetUniformLocation(program, "mat.shininess"), mat.shininess);
-	g_prism.DrawShape(GL_TRIANGLES);
+	// Front Right Wall.
+	transformObject(glm::vec3(15.0f, 6.0f, 2.0f), X_AXIS, 0.0f, glm::vec3(17.0f, 0.0f, -1.0f));
+	g_wall.DrawShape(GL_TRIANGLES);
+
+	// Left Wall.
+	transformObject(glm::vec3(2.0f, 6.0f, -32.0f), X_AXIS, 0.0f, glm::vec3(-1.0f, 0.0f, 0.0f));
+	g_wall.DrawShape(GL_TRIANGLES);
+
+	// Right Wall.
+	transformObject(glm::vec3(2.0f, 6.0f, -32.0f), X_AXIS, 0.0f, glm::vec3(31.0f, 0.0f, 0.0f));
+	g_wall.DrawShape(GL_TRIANGLES);
+
+	// Back Wall.
+	transformObject(glm::vec3(32.0f, 6.0f, 2.0f), X_AXIS, 0.0f, glm::vec3(0.0f, 0.0f, -33.0f));
+	g_wall.DrawShape(GL_TRIANGLES);
+
+	//// Plane.
+	//transformObject(glm::vec3(1.0f, 1.0f, 1.0f), X_AXIS, -90.0f, glm::vec3(0.0f, -0.1f, 0.0f));
+	//g_grid.DrawShape(GL_TRIANGLES);
+
+	//// Cube.
+	//transformObject(glm::vec3(1.0f, 1.0f, 1.0f), X_AXIS, 0.0f, glm::vec3(6.0f, 0.0f, 0.0f));
+	//g_cube.DrawShape(GL_TRIANGLES);
+
+	//// Prism.
+	//transformObject(glm::vec3(1.0f, 1.0f, 1.0f), X_AXIS, 0.0f, glm::vec3(4.0f, 2.0f, -1.0f));
+	//glUniform1f(glGetUniformLocation(program, "mat.specularStrength"), 1.0f);
+	//glUniform1f(glGetUniformLocation(program, "mat.shininess"), 128);
+	//g_prism.DrawShape(GL_TRIANGLES);
+	//
+	//// Prism2.
+	//transformObject(glm::vec3(1.0f, 1.0f, 1.0f), X_AXIS, 0.0f, glm::vec3(4.0f, 0.0f, -1.0f));
+	//glUniform1f(glGetUniformLocation(program, "mat.specularStrength"), mat.specularStrength);
+	//glUniform1f(glGetUniformLocation(program, "mat.shininess"), mat.shininess);
+	//g_prism.DrawShape(GL_TRIANGLES);
 	
 	glBindTexture(GL_TEXTURE_2D, 0);
 	
