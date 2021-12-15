@@ -84,7 +84,7 @@ glm::mat4 View, Projection;
 unsigned char keys = 0; // Initialized to 0 or 0b00000000.
 
 // Texture variables.
-GLuint blankID, hedgeID, wallID;
+GLuint blankID, hedgeID, wallID, wall2ID;
 GLint width, height, bitDepth;
 
 // Light objects. Now OOP.
@@ -217,6 +217,22 @@ void init(void)
 	stbi_image_free(image);
 	// End third image.
 
+	// Load fourth image
+	image = stbi_load("wall2.jpg", &width, &height, &bitDepth, 0);
+	if (!image) { cout << "Unable to load file!" << endl; }
+	glGenTextures(1, &wall2ID);
+	glBindTexture(GL_TEXTURE_2D, wall2ID);
+	// Note: image types with native transparency will need to be GL_RGBA instead of GL_RGB.
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+	// glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glGenerateMipmap(GL_TEXTURE_2D);
+	stbi_image_free(image);
+	// End fourth image.
+
 	glUniform1i(glGetUniformLocation(program, "texture0"), 0);
 
 	// Setting material values.
@@ -347,11 +363,11 @@ void display(void)
 	// List of hedges
 	// 1
 	glBindTexture(GL_TEXTURE_2D, hedgeID);
-	transformObject(glm::vec3(12.0f, 2.0f, 1.0f), X_AXIS, 0.0f, glm::vec3(12.0f, 0.0f, -3.0f));
+	transformObject(glm::vec3(13.0f, 2.0f, 1.0f), X_AXIS, 0.0f, glm::vec3(11.0f, 0.0f, -3.0f));
 	g_hedge.DrawShape(GL_TRIANGLES);
 
 	// 2
-	transformObject(glm::vec3(1.0f, 2.0f, 4.0f), X_AXIS, 0.0f, glm::vec3(23.0f, 0.0f, -7.0f));
+	transformObject(glm::vec3(1.0f, 2.0f, 5.0f), X_AXIS, 0.0f, glm::vec3(23.0f, 0.0f, -8.0f));
 	g_hedge.DrawShape(GL_TRIANGLES);
 
 	// 3
@@ -373,6 +389,422 @@ void display(void)
 	// 7
 	transformObject(glm::vec3(1.0f, 2.0f, 3.0f), X_AXIS, 0.0f, glm::vec3(29.0f, 0.0f, -6.0f));
 	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 8
+	transformObject(glm::vec3(1.0f, 2.0f, 7.0f), X_AXIS, 0.0f, glm::vec3(29.0f, 0.0f, -14.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 9
+	transformObject(glm::vec3(5.0f, 2.0f, 1.0f), X_AXIS, 0.0f, glm::vec3(24.0f, 0.0f, -12.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 10
+	transformObject(glm::vec3(1.0f, 2.0f, 3.0f), X_AXIS, 0.0f, glm::vec3(23.0f, 0.0f, -12.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 11
+	transformObject(glm::vec3(1.0f, 2.0f, 3.0f), X_AXIS, 0.0f, glm::vec3(25.0f, 0.0f, -9.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 12
+	transformObject(glm::vec3(8.0f, 2.0f, 1.0f), X_AXIS, 0.0f, glm::vec3(21.0f, 0.0f, -14.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 13
+	transformObject(glm::vec3(7.0f, 2.0f, 1.0f), X_AXIS, 0.0f, glm::vec3(25.0f, 0.0f, -16.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 14
+	transformObject(glm::vec3(1.0f, 2.0f, 16.0f), X_AXIS, 0.0f, glm::vec3(23.0f, 0.0f, -30.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 15
+	transformObject(glm::vec3(6.0f, 2.0f, 1.0f), X_AXIS, 0.0f, glm::vec3(24.0f, 0.0f, -18.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 16
+	transformObject(glm::vec3(6.0f, 2.0f, 1.0f), X_AXIS, 0.0f, glm::vec3(25.0f, 0.0f, -20.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 17
+	transformObject(glm::vec3(6.0f, 2.0f, 1.0f), X_AXIS, 0.0f, glm::vec3(24.0f, 0.0f, -30.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 18
+	transformObject(glm::vec3(1.0f, 2.0f, 8.0f), X_AXIS, 0.0f, glm::vec3(29.0f, 0.0f, -29.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 19
+	transformObject(glm::vec3(1.0f, 2.0f, 8.0f), X_AXIS, 0.0f, glm::vec3(25.0f, 0.0f, -28.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 20
+	transformObject(glm::vec3(1.0f, 2.0f, 7.0f), X_AXIS, 0.0f, glm::vec3(27.0f, 0.0f, -28.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 21
+	transformObject(glm::vec3(4.0f, 2.0f, 1.0f), X_AXIS, 0.0f, glm::vec3(17.0f, 0.0f, -30.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 22
+	transformObject(glm::vec3(6.0f, 2.0f, 1.0f), X_AXIS, 0.0f, glm::vec3(15.0f, 0.0f, -28.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 23
+	transformObject(glm::vec3(1.0f, 2.0f, 3.0f), X_AXIS, 0.0f, glm::vec3(21.0f, 0.0f, -30.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 24
+	transformObject(glm::vec3(1.0f, 2.0f, 3.0f), X_AXIS, 0.0f, glm::vec3(15.0f, 0.0f, -31.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 25
+	transformObject(glm::vec3(12.0f, 2.0f, 1.0f), X_AXIS, 0.0f, glm::vec3(11.0f, 0.0f, -26.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 26
+	transformObject(glm::vec3(1.0f, 2.0f, 2.0f), X_AXIS, 0.0f, glm::vec3(11.0f, 0.0f, -28.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 27
+	transformObject(glm::vec3(1.0f, 2.0f, 3.0f), X_AXIS, 0.0f, glm::vec3(13.0f, 0.0f, -30.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 28
+	transformObject(glm::vec3(10.0f, 2.0f, 1.0f), X_AXIS, 0.0f, glm::vec3(11.0f, 0.0f, -24.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 29
+	transformObject(glm::vec3(1.0f, 2.0f, 9.0f), X_AXIS, 0.0f, glm::vec3(21.0f, 0.0f, -24.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 30
+	transformObject(glm::vec3(1.0f, 2.0f, 9.0f), X_AXIS, 0.0f, glm::vec3(21.0f, 0.0f, -13.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 31
+	transformObject(glm::vec3(4.0f, 2.0f, 1.0f), X_AXIS, 0.0f, glm::vec3(17.0f, 0.0f, -10.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 32
+	transformObject(glm::vec3(1.0f, 2.0f, 5.0f), X_AXIS, 0.0f, glm::vec3(19.0f, 0.0f, -8.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 33
+	transformObject(glm::vec3(1.0f, 2.0f, 5.0f), X_AXIS, 0.0f, glm::vec3(17.0f, 0.0f, -9.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 34
+	transformObject(glm::vec3(1.0f, 2.0f, 3.0f), X_AXIS, 0.0f, glm::vec3(15.0f, 0.0f, -7.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 35
+	transformObject(glm::vec3(2.0f, 2.0f, 1.0f), X_AXIS, 0.0f, glm::vec3(15.0f, 0.0f, -8.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 36
+	transformObject(glm::vec3(2.0f, 2.0f, 1.0f), X_AXIS, 0.0f, glm::vec3(13.0f, 0.0f, -5.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 37
+	glBindTexture(GL_TEXTURE_2D, hedgeID);
+	transformObject(glm::vec3(1.0f, 2.0f, 5.0f), X_AXIS, 0.0f, glm::vec3(11.0f, 0.0f, -8.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+	// 38
+	glBindTexture(GL_TEXTURE_2D, hedgeID);
+	transformObject(glm::vec3(1.0f, 2.0f, 3.0f), X_AXIS, 0.0f, glm::vec3(13.0f, 0.0f, -9.0f));
+	g_hedge.DrawShape(GL_TRIANGLES);
+
+
+
+	// wall top thingy - front wall
+	glBindTexture(GL_TEXTURE_2D, wall2ID);
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(13.0f, 5.0f, 0.5f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(13.0f, 5.0f, -1.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(10.0f, 5.0f, 0.5f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(10.0f, 5.0f, -1.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(7.0f, 5.0f, 0.5f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(7.0f, 5.0f, -1.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(4.0f, 5.0f, 0.5f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(4.0f, 5.0f, -1.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(1.0f, 5.0f, 0.5f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(1.0f, 5.0f, -1.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(17.0f, 5.0f, 0.5f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(17.0f, 5.0f, -1.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(20.0f, 5.0f, 0.5f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(20.0f, 5.0f, -1.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(23.0f, 5.0f, 0.5f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(23.0f, 5.0f, -1.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(26.0f, 5.0f, 0.5f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(26.0f, 5.0f, -1.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(29.0f, 5.0f, 0.5f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(29.0f, 5.0f, -1.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	// wall top thingy - back wall
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(13.0f, 5.0f, -31.5f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(13.0f, 5.0f, -33.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(10.0f, 5.0f, -31.5f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(10.0f, 5.0f, -33.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(7.0f, 5.0f, -31.5f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(7.0f, 5.0f, -33.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(4.0f, 5.0f, -31.5f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(4.0f, 5.0f, -33.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(1.0f, 5.0f, -31.5f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(1.0f, 5.0f, -33.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(17.0f, 5.0f, -31.5f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(17.0f, 5.0f, -33.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(0.75f, 1.2f, 0.5f), X_AXIS, 0.0f, glm::vec3(15.70f, 5.0f, -31.5f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(0.75f, 1.2f, 0.5f), X_AXIS, 0.0f, glm::vec3(15.70f, 5.0f, -33.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(20.0f, 5.0f, -31.5f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(20.0f, 5.0f, -33.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(23.0f, 5.0f, -31.5f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(23.0f, 5.0f, -33.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(26.0f, 5.0f, -31.5f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(26.0f, 5.0f, -33.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(29.0f, 5.0f, -31.5f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), X_AXIS, 0.0f, glm::vec3(29.0f, 5.0f, -33.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	// wall top thingy - right wall
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(31.0f, 5.0f, -29.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(32.5f, 5.0f, -29.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(31.0f, 5.0f, -26.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(32.5f, 5.0f, -26.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(31.0f, 5.0f, -23.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(32.5f, 5.0f, -23.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(31.0f, 5.0f, -20.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(32.5f, 5.0f, -20.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(31.0f, 5.0f, -17.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(32.5f, 5.0f, -17.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(31.0f, 5.0f, -14.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(32.5f, 5.0f, -14.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(31.0f, 5.0f, -11.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(32.5f, 5.0f, -11.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(31.0f, 5.0f, -8.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(32.5f, 5.0f, -8.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(31.0f, 5.0f, -5.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(32.5f, 5.0f, -5.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(31.0f, 5.0f, -2.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(32.5f, 5.0f, -2.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	// wall top thingy - left wall
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(0.5f, 5.0f, -29.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(-1.0f, 5.0f, -29.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(0.5f, 5.0f, -26.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(-1.0f, 5.0f, -26.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(0.5f, 5.0f, -23.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(-1.0f, 5.0f, -23.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(0.5f, 5.0f, -20.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(-1.0f, 5.0f, -20.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(0.5f, 5.0f, -17.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(-1.0f, 5.0f, -17.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(0.5f, 5.0f, -14.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(-1.0f, 5.0f, -14.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(0.5f, 5.0f, -11.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(-1.0f, 5.0f, -11.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(0.5f, 5.0f, -8.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(-1.0f, 5.0f, -8.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(0.5f, 5.0f, -5.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(-1.0f, 5.0f, -5.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(0.5f, 5.0f, -2.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
+
+	transformObject(glm::vec3(2.0f, 0.8f, 0.5f), Y_AXIS, 90.0f, glm::vec3(-1.0f, 5.0f, -2.0f));
+	g_wall2.DrawShape(GL_TRIANGLES);
 
 	//// Plane.
 	//transformObject(glm::vec3(1.0f, 1.0f, 1.0f), X_AXIS, -90.0f, glm::vec3(0.0f, -0.1f, 0.0f));
@@ -571,6 +1003,7 @@ void clean()
 	glDeleteTextures(1, &blankID);
 	glDeleteTextures(1, &hedgeID);
 	glDeleteTextures(1, &wallID);
+	glDeleteTextures(1, &wall2ID);
 }
 
 //---------------------------------------------------------------------
